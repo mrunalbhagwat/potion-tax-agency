@@ -1,0 +1,48 @@
+<div class="mb-8">
+  <a
+    (click)="back.emit()"
+    class="text-[#1687E4] text-sm flex items-center gap-1 mb-3 cursor-pointer"
+  >
+    <i class="fa fa-arrow-left"></i> Personal tax return (SA100)
+  </a>
+</div>
+<div class="flex flex-col max-w-2xl mx-auto lg:flex-row justify-between items-center gap-18">
+  <div class="w-full lg:w-1/2">
+    <h2 class="text-2xl font-semibold mb-2">
+      Which tax year are you filing your self-assessment for?
+    </h2>
+    <p class="text-gray-500 text-sm mb-6">
+      Hint: You’re most likely filing for the last tax year, April 2024–2025.
+      <i class="fa fa-info-circle text-[#E30613]"></i>
+    </p>
+
+    <p class="text-gray-500 text-sm mb-6">
+      Tax Year
+    </p>
+
+    <div class="space-y-3 mb-6">
+      <label
+        *ngFor="let year of years"
+        class="flex items-center justify-between border rounded-lg p-3 cursor-pointer hover:border-[#1687E4]"
+        [class.border-[#1687E4]]="selectedYear === year"
+      >
+        <span>{{ year }}</span>
+        <input
+          type="radio"
+          name="taxYear"
+          [value]="year"
+          [(ngModel)]="selectedYear"
+          class="form-radio text-[#1687E4]"
+        />
+      </label>
+    </div>
+
+    <button (click)="continue()" class="bg-[#E30613] text-white px-6 py-2 rounded-full">
+      Start Filing
+    </button>
+  </div>
+
+  <div class="w-full lg:w-1/2 flex justify-evenly">
+    <img src="assets/person-laptop.png" alt="Filing Illustration" class="max-w-sm" />
+  </div>
+</div>

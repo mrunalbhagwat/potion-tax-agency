@@ -1,0 +1,41 @@
+<!-- header -->
+<!-- Fixed Header -->
+<div class="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm">
+  <div class="max-w-7xl mx-auto flex items-center justify-between m-6">
+    <div class="flex items-center gap-3">
+      <img src="assets/logo.png" alt="PotionTax Logo" class="h-8 w-auto" />
+    </div>
+    <div class="flex items-center gap-8 text-base">
+      <span class="hover:text-[#1687E4] cursor-pointer">Verification</span>
+      <span class="hover:text-[#1687E4] cursor-pointer">Support</span>
+      <span class="hover:text-[#1687E4] cursor-pointer">
+        <i class="fas fa-globe mr-1"></i> Login
+      </span>
+    </div>
+  </div>
+  <!-- Progress Bar -->
+  <div class="w-full bg-gray-200 rounded-full h-2">
+    <div class="bg-blue-600 h-2 transition-all duration-500 ease-in-out"
+      [style.width.%]="(currentStep / totalSteps) * 100"></div>
+  </div>
+</div>
+<div class="h-20"></div>
+
+<div class="min-h-screen bg-gray-100 flex items-center justify-center px-6 py-10">
+  <div class="w-full max-w-5xl p-10 mx-auto bg-white rounded-2xl shadow-md ">
+    <!-- Step Content -->
+    <ng-container [ngSwitch]="currentStep">
+      <app-step1 *ngSwitchCase="1" (next)="nextStep()"></app-step1>
+      <app-step2 *ngSwitchCase="2" (next)="nextStep()" (back)="prevStep()"></app-step2>
+      <app-step3 *ngSwitchCase="3" (next)="nextStep()" (back)="prevStep()"></app-step3>
+      <app-step4 *ngSwitchCase="4" (next)="nextStep()" (back)="prevStep()"></app-step4>
+      <app-step5 *ngSwitchCase="5" (next)="nextStep()" (back)="prevStep()"></app-step5>
+      <app-step6 *ngSwitchCase="6" (next)="nextStep()" (back)="prevStep()"></app-step6>
+      <app-step7 *ngSwitchCase="7" (next)="nextStep()" (back)="prevStep()"></app-step7>
+      <app-step8 *ngSwitchCase="8" (next)="nextStep()" (back)="prevStep()"></app-step8>
+      <app-step9 *ngSwitchCase="9" (next)="nextStep()" (back)="prevStep()"></app-step9>
+      <app-step10 *ngSwitchCase="10" (next)="nextStep()" (back)="prevStep()"></app-step10>
+      <app-step11 *ngSwitchCase="11" (back)="prevStep()" (submitForm)="onSubmit()"></app-step11>
+    </ng-container>
+  </div>
+</div>

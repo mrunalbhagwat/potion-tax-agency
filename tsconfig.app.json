@@ -8,7 +8,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/form-flow/step2-tax-year.component", "src/app/form-flow/step2-tax-year"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

@@ -1,0 +1,85 @@
+<div class="mb-8">
+    <a (click)="back.emit()" class="text-[#1687E4] text-sm flex items-center gap-1 mb-4 cursor-pointer">
+    <i class="fa fa-arrow-left"></i> Back to spouse information
+  </a>
+
+</div>
+<div class="max-w-2xl mx-auto bg-white p-10 rounded-2xl shadow-sm">
+
+  <h2 class="text-2xl font-semibold mb-1">Provide dependant(s) information</h2>
+  <p class="text-gray-500 text-sm mb-8">
+    Enter your residence address for verification in Latin letters
+  </p>
+
+  <form [formGroup]="form" class="space-y-6">
+    <div>
+      <label class="block text-sm font-medium mb-1">
+        Are you claiming dependants? <span class="text-red-500">*</span>
+      </label>
+      <select
+        formControlName="claimingDependants"
+        class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+      >
+        <option>No</option>
+        <option>Yes</option>
+      </select>
+    </div>
+
+    <div *ngIf="form.get('claimingDependants')?.value === 'Yes'" class="space-y-4">
+      <div
+        *ngFor="let dep of dependants.controls; let i = index"
+        [formGroup]="dep"
+        class="bg-[#F1F8FE] border border-[#CFE7FC] rounded-lg p-4 space-y-3"
+      >
+        <div class="flex justify-between items-center">
+          <p class="font-medium text-lg mb-2">Dependent #{{ i + 1 }}</p>
+          <button type="button" (click)="removeDependant(i)" class="text-red-500 text-sm">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+
+        <label class="flex justify-start text-base font-medium mb-1">Dependent full name</label>
+        <input
+          placeholder=""
+          formControlName="fullName"
+          class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+        />
+
+        <label class="flex justify-start text-base font-medium mb-1">Dependent occupation *</label>
+        <input
+          placeholder=""
+          formControlName="occupation"
+          class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+        />
+
+        <label class="flex justify-start text-base font-medium mb-1">Dependent date of birth</label>
+        <input
+          placeholder=""
+          type="date"
+          formControlName="dob"
+          class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+        />
+      </div>
+
+      <div class="flex justify-end">
+        <button
+          type="button"
+          (click)="addDependant()"
+          class="bg-transparent border border-[#1687E4] text-[#1687E4] px-4 py-1 rounded-full text-sm hover:bg-[#1687E4] hover:text-white transition"
+        >
+          Add Dependant
+        </button>
+      </div>
+    </div>
+
+    <div class="flex gap-4 mt-6">
+      <button
+        type="button"
+        (click)="continue()"
+        class="bg-[#E30613] text-white px-8 py-2 rounded-full hover:bg-[#c20511] transition"
+      >
+        Continue
+      </button>
+    </div>
+  </form>
+</div>

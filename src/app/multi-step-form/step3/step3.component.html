@@ -1,0 +1,41 @@
+<div class="mb-8">
+  <a (click)="back.emit()" class="text-[#1687E4] text-sm flex items-center gap-1 mb-4 cursor-pointer">
+    <i class="fa fa-arrow-left"></i> Back to tax year
+  </a>
+</div>
+<div class="max-w-2xl mx-auto text-center">
+  <h2 class="text-2xl font-semibold mb-2">Provide your information</h2>
+  <p class="text-gray-500 text-base mb-4">
+    Enter your residence address for verification in Latin letters
+  </p>
+
+  <form [formGroup]="form" class="space-y-4 mb-4 max-w-xl mx-auto">
+    <div>
+      <label class="flex justify-start text-base font-medium mb-4">Did someone refer you? *</label>
+      <select formControlName="referred" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
+        <option>No</option>
+        <option>Yes</option>
+      </select>
+    </div>
+
+    <div *ngIf="form.get('referred')?.value === 'Yes'">
+      <label class="flex justify-start text-base font-medium mb-1">If yes, provide referral full name</label>
+      <input type="text" formControlName="referrerName" class="w-full rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    </div>
+
+    <label class="flex justify-start text-base font-medium mb-4">Your occupation *</label>
+    <input placeholder="" formControlName="occupation" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <label class="flex justify-start text-base font-medium mb-4">Your date of birth</label>
+    <input placeholder="" formControlName="dob" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <label class="flex justify-start text-base font-medium mb-4">Your Address *</label>
+    <input placeholder="" formControlName="address" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <label class="flex justify-start text-base font-medium mb-4">Your City/Town *</label>
+    <input placeholder="" formControlName="city" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <label class="flex justify-start text-base font-medium mb-4">Your State/Region/Province *</label>
+    <input placeholder="" formControlName="state" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+
+    <button type="button" (click)="continue()" class="bg-[#E30613] text-white px-6 py-2 rounded-full mt-4">
+      Continue
+    </button>
+  </form>
+</div>
