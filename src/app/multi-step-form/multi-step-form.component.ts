@@ -11,6 +11,8 @@ import { Step8Component } from './step8/step8.component';
 import { Step9Component } from './step9/step9.component';
 import { Step10Component } from './step10/step10.component';
 import { Step11Component } from './step11/step11.component';
+import { Step12Component } from './step12/step12.component';
+import { Step13Component } from './step13/step13.component';
 
 @Component({
   selector: 'app-multi-step-form',
@@ -27,15 +29,23 @@ import { Step11Component } from './step11/step11.component';
     Step8Component,
     Step9Component,
     Step10Component,
-    Step11Component
+    Step11Component,
+    Step12Component,
+    Step13Component
   ],
   templateUrl: './multi-step-form.component.html',
-  
+
 })
 export class MultiStepFormComponent {
-  currentStep = 1;
-  totalSteps = 11;
+  isMenuOpen = false;
 
+  currentStep = 1;
+  totalSteps = 13;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+  
   nextStep() {
     if (this.currentStep < this.totalSteps) {
       this.currentStep++;

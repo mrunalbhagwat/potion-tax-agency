@@ -1,0 +1,57 @@
+<div class="mb-8">
+    <a (click)="back.emit()" class="text-[#1687E4] text-sm flex items-center gap-1 mb-4 cursor-pointer">
+        <i class="fa fa-arrow-left"></i> Back to tax filing
+    </a>
+</div>
+
+<div class="max-w-5xl mx-auto bg-white p-8 flex flex-col md:flex-row items-center justify-between">
+    <!-- Left Section -->
+    <div class="w-full md:w-1/2 space-y-5">
+        <h2 class="text-2xl font-semibold text-gray-800">Enter your personal details</h2>
+
+        <form [formGroup]="form" class="space-y-4">
+            <!-- Name -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input formControlName="name" type="text" placeholder="Enter your name"
+                    class="w-full rounded-md p-2 border-gray-600 focus:outline-none focus:border-[#1687E4]" />
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input formControlName="email" type="email" placeholder="Enter your email"
+                    class="w-full rounded-md p-2 focus:outline-none border-gray-600  focus:border-[#1687E4]" />
+            </div>
+
+            <!-- Mobile Number -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+                <input formControlName="mobile_number" type="text" placeholder="Enter 10-digit mobile number"
+                    class="w-full rounded-md p-2 focus:outline-none border-gray-600  focus:border-[#1687E4]" />
+            </div>
+
+            <!-- Password -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <input formControlName="password" type="password" placeholder="Enter password"
+                    class="w-full rounded-md p-2 focus:outline-none border-gray-600  focus:border-[#1687E4]" />
+            </div>
+
+            <button type="button" (click)="continue()" [disabled]="loading"
+                class="bg-[#E30613] text-white px-6 py-2 rounded-full mt-4 flex items-center justify-center gap-2 disabled:opacity-50">
+                <span *ngIf="!loading">Continue</span>
+                <span *ngIf="loading">
+                    <i class="fa fa-spinner fa-spin"></i> Submitting...
+                </span>
+            </button>
+
+            <p *ngIf="errorMessage" class="text-red-500 text-sm mt-2">{{ errorMessage }}</p>
+        </form>
+    </div>
+
+    <!-- Right Illustration -->
+    <div class="w-full md:w-1/2 flex justify-center mt-8 md:mt-0">
+        <img src="assets/person-laptop.png" alt="Self Assessment" class="max-h-72 object-contain" />
+    </div>
+</div>

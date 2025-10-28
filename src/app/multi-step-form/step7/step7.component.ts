@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { TaxSubmissionService } from '../../services/tax-submission.service';
 
 @Component({
   selector: 'app-step7',
@@ -9,25 +11,75 @@ import { CommonModule } from '@angular/common';
   templateUrl: './step7.component.html',
 })
 export class Step7Component {
-  @Output() next = new EventEmitter<void>();
   @Output() back = new EventEmitter<void>();
+  @Output() next = new EventEmitter<void>();
 
   form: FormGroup;
+  loading = false;
+  errorMessage = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private taxService: TaxSubmissionService) {
     this.form = this.fb.group({
-      claimingDependents: ['No', Validators.required],
-      businessName: ['', Validators.required],
+      hasBusiness: ['No', Validators.required],
+      businessName: [''],
       businessEIN: [''],
+    });
+
+    // 👇 Watch changes and update validators dynamically
+    this.form.get('hasBusiness')?.valueChanges.subscribe((value) => {
+      const businessNameControl = this.form.get('businessName');
+      const businessEINControl = this.form.get('businessEIN');
+
+      if (value === 'Yes') {
+        businessNameControl?.setValidators([Validators.required]);
+        businessEINControl?.setValidators([]);
+      } else {
+        businessNameControl?.clearValidators();
+        businessEINControl?.clearValidators();
+      }
+
+      businessNameControl?.updateValueAndValidity();
+      businessEINControl?.updateValueAndValidity();
     });
   }
 
   continue() {
-    if (this.form.valid) {
-      console.log(this.form.value);
-      this.next.emit();
-    } else {
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
+      return;
     }
+
+    const sessionId = localStorage.getItem('session_id');
+    if (!sessionId) {
+      this.errorMessage = 'Missing session. Please go back to Step 1.';
+      return;
+    }
+
+    const payload = {
+      session_id: sessionId,
+      has_business: this.form.value.hasBusiness === 'Yes',
+      business_name: this.form.value.businessName || '',
+      business_ein: this.form.value.businessEIN || '',
+    };
+
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.taxService.submitStep8(payload).subscribe({
+      next: (res: any) => {
+        this.loading = false;
+        if (res?.success) {
+          console.log('✅ Step 8 (Business Info) success:', res);
+          this.next.emit();
+        } else {
+          this.errorMessage = res?.message || 'Unexpected server response';
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.loading = false;
+        console.error('❌ Step 8 Error:', err);
+        this.errorMessage = err.error?.message || 'Server error occurred';
+      },
+    });
   }
 }

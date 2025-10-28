@@ -14,12 +14,18 @@
         <i class="fa" [ngClass]="opt.icon"></i>
         <span>{{ opt.label }}</span>
       </div>
-      <input type="checkbox" class="form-checkbox"  [checked]="selectedOption === opt.label" />
+      <input type="checkbox" class="form-checkbox" [checked]="selectedOption === opt.label" />
     </div>
-    <button (click)="continue()" [disabled]="!selectedOption"
-      class="bg-[#D70121] text-white px-6 py-2 rounded-full disabled:opacity-50 flex justify-start">
-      Continue
+    <button (click)="continue()" [disabled]="!selectedOption || loading"
+      class="bg-[#D70121] text-white px-6 py-2 rounded-full disabled:opacity-50 flex justify-center items-center gap-2">
+      <span *ngIf="!loading">Continue</span>
+      <span *ngIf="loading">
+        <i class="fa fa-spinner fa-spin"></i> Processing...
+      </span>
     </button>
+
+    <p *ngIf="errorMessage" class="text-red-600 mt-2 text-sm">{{ errorMessage }}</p>
+
   </div>
 
   <div class="max-w-2xl mx-auto py-8">

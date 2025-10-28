@@ -12,7 +12,8 @@
   <form [formGroup]="form" class="space-y-4 mb-4 max-w-xl mx-auto">
     <div>
       <label class="flex justify-start text-base font-medium mb-4">Did someone refer you? *</label>
-      <select formControlName="referred" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
+      <select formControlName="referred"
+        class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
         <option>No</option>
         <option>Yes</option>
       </select>
@@ -20,22 +21,35 @@
 
     <div *ngIf="form.get('referred')?.value === 'Yes'">
       <label class="flex justify-start text-base font-medium mb-1">If yes, provide referral full name</label>
-      <input type="text" formControlName="referrerName" class="w-full rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+      <input type="text" formControlName="referrerName"
+        class="w-full rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
     </div>
 
     <label class="flex justify-start text-base font-medium mb-4">Your occupation *</label>
-    <input placeholder="" formControlName="occupation" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <input placeholder="" formControlName="occupation"
+      class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
     <label class="flex justify-start text-base font-medium mb-4">Your date of birth</label>
-    <input placeholder="" formControlName="dob" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <input placeholder="" type="date" formControlName="dob"
+      class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
     <label class="flex justify-start text-base font-medium mb-4">Your Address *</label>
-    <input placeholder="" formControlName="address" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <input placeholder="" formControlName="address"
+      class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
     <label class="flex justify-start text-base font-medium mb-4">Your City/Town *</label>
-    <input placeholder="" formControlName="city" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <input placeholder="" formControlName="city"
+      class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
     <label class="flex justify-start text-base font-medium mb-4">Your State/Region/Province *</label>
-    <input placeholder="" formControlName="state" class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <input placeholder="" formControlName="state"
+      class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
 
-    <button type="button" (click)="continue()" class="bg-[#E30613] text-white px-6 py-2 rounded-full mt-4">
-      Continue
+    <button type="button" (click)="continue()" [disabled]="loading"
+      class="bg-[#E30613] text-white px-6 py-2 rounded-full mt-4 flex items-center justify-center gap-2 disabled:opacity-50">
+      <span *ngIf="!loading">Continue</span>
+      <span *ngIf="loading">
+        <i class="fa fa-spinner fa-spin"></i> Submitting...
+      </span>
     </button>
+
+    <p *ngIf="errorMessage" class="text-red-600 mt-2 text-sm">{{ errorMessage }}</p>
+
   </form>
 </div>

@@ -1,5 +1,5 @@
 <div class="mb-8">
-    <a (click)="back.emit()" class="text-[#1687E4] text-sm flex items-center gap-1 mb-4 cursor-pointer">
+  <a (click)="back.emit()" class="text-[#1687E4] text-sm flex items-center gap-1 mb-4 cursor-pointer">
     <i class="fa fa-arrow-left"></i> Back to business info
   </a>
 
@@ -10,38 +10,26 @@
   </h2>
 
   <div class="grid md:grid-rows-3 gap-8">
-    <div
-      *ngFor="let doc of docs"
+    <div *ngFor="let doc of docs"
       class="border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col text-center transition-all duration-500 ease-in-out"
-      [ngClass]="{ 'h-[320px]': doc.file, '': !doc.file }"
-    >
+      [ngClass]="{ 'h-[320px]': doc.file, '': !doc.file }">
       <!-- Header (Always Visible) -->
-      <div
-        class="flex flex-row justify-between items-center px-6 py-3"
-        [ngClass]="{ 'border-b bg-gray-50': doc.file }"
-      >
+      <div class="flex flex-row justify-between items-center px-6 py-3" [ngClass]="{ 'border-b bg-gray-50': doc.file }">
         <div class="text-gray-700 font-medium">{{ doc.label }}</div>
 
         <label
-          class="bg-[#E30613] hover:bg-red-700 text-white text-sm font-medium px-5 py-2 rounded-full cursor-pointer"
-        >
+          class="bg-[#E30613] hover:bg-red-700 text-white text-sm font-medium px-5 py-2 rounded-full cursor-pointer">
           {{ doc.file ? 'Re-upload' : 'Upload' }}
           <input type="file" class="hidden" (change)="onFileChange($event, doc)" />
         </label>
       </div>
 
       <!-- Expanded Box (only visible after upload) -->
-      <div
-        *ngIf="doc.file"
-        class="flex flex-col w-full h-full justify-between transition-all duration-500"
-      >
+      <div *ngIf="doc.file" class="flex flex-col w-full h-full justify-between transition-all duration-500">
         <!-- Preview -->
         <div class="h-44 bg-gray-50 flex items-center justify-center overflow-hidden">
           <ng-container *ngIf="doc.preview; else fileIcon">
-            <img
-              [src]="doc.preview"
-              class="max-h-40 max-w-[90%] object-contain rounded-md shadow-sm"
-            />
+            <img [src]="doc.preview" class="max-h-40 max-w-[90%] object-contain rounded-md shadow-sm" />
           </ng-container>
           <ng-template #fileIcon>
             <i class="fa-regular fa-file text-4xl text-gray-400"></i>
@@ -54,9 +42,7 @@
         </div>
 
         <!-- Actions -->
-        <div
-          class="w-full border-t px-4 py-2 flex justify-between items-center text-xs"
-        >
+        <div class="w-full border-t px-4 py-2 flex justify-between items-center text-xs">
           <div class="flex gap-3">
             <button class="text-red-500 font-medium" (click)="remove(doc)">
               Remove
@@ -70,12 +56,14 @@
   </div>
 
   <div class="flex justify-center pt-8">
-    
-    <button
-      class="bg-[#E30613] hover:bg-red-700 text-white px-6 py-2 rounded-full"
-      (click)="continue()"
-    >
-      Continue
+
+    <button type="button" (click)="continue()" [disabled]="loading"
+      class="bg-[#E30613] text-white px-6 py-2 rounded-full mt-4 flex items-center justify-center gap-2 disabled:opacity-50">
+      <span *ngIf="!loading">Continue</span>
+      <span *ngIf="loading">
+        <i class="fa fa-spinner fa-spin"></i> Submitting...
+      </span>
     </button>
+
   </div>
 </div>

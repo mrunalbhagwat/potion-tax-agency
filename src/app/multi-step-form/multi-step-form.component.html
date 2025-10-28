@@ -1,24 +1,52 @@
-<!-- header -->
+
 <!-- Fixed Header -->
 <div class="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm">
-  <div class="max-w-7xl mx-auto flex items-center justify-between m-6">
+  <div class="max-w-7xl mx-auto px-6 lg:px-0 flex items-center justify-between m-6">
+    <!-- Logo -->
     <div class="flex items-center gap-3">
       <img src="assets/logo.png" alt="PotionTax Logo" class="h-8 w-auto" />
     </div>
-    <div class="flex items-center gap-8 text-base">
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center gap-8 text-base">
       <span class="hover:text-[#1687E4] cursor-pointer">Verification</span>
       <span class="hover:text-[#1687E4] cursor-pointer">Support</span>
       <span class="hover:text-[#1687E4] cursor-pointer">
         <i class="fas fa-globe mr-1"></i> Login
       </span>
     </div>
+
+    <!-- Hamburger Button (Mobile) -->
+    <button
+      class="md:hidden text-gray-700 focus:outline-none"
+      (click)="toggleMenu()"
+    >
+      <i *ngIf="!isMenuOpen" class="fas fa-bars text-2xl"></i>
+      <i *ngIf="isMenuOpen" class="fas fa-times text-2xl"></i>
+    </button>
   </div>
+
+  <!-- Mobile Menu -->
+  <div
+    *ngIf="isMenuOpen"
+    class="md:hidden flex flex-col items-start gap-4 px-6 pb-4 text-base bg-white shadow-md border-t border-gray-100"
+  >
+    <span class="hover:text-[#1687E4] cursor-pointer">Verification</span>
+    <span class="hover:text-[#1687E4] cursor-pointer">Support</span>
+    <span class="hover:text-[#1687E4] cursor-pointer">
+      <i class="fas fa-globe mr-1"></i> Login
+    </span>
+  </div>
+
   <!-- Progress Bar -->
   <div class="w-full bg-gray-200 rounded-full h-2">
-    <div class="bg-blue-600 h-2 transition-all duration-500 ease-in-out"
-      [style.width.%]="(currentStep / totalSteps) * 100"></div>
+    <div
+      class="bg-blue-600 h-2 transition-all duration-500 ease-in-out"
+      [style.width.%]="(currentStep / totalSteps) * 100"
+    ></div>
   </div>
-</div>
+  </div>
+
 <div class="h-20"></div>
 
 <div class="min-h-screen bg-gray-100 flex items-center justify-center px-6 py-10">
@@ -35,7 +63,9 @@
       <app-step8 *ngSwitchCase="8" (next)="nextStep()" (back)="prevStep()"></app-step8>
       <app-step9 *ngSwitchCase="9" (next)="nextStep()" (back)="prevStep()"></app-step9>
       <app-step10 *ngSwitchCase="10" (next)="nextStep()" (back)="prevStep()"></app-step10>
-      <app-step11 *ngSwitchCase="11" (back)="prevStep()" (submitForm)="onSubmit()"></app-step11>
+      <app-step11 *ngSwitchCase="11" (next)="nextStep()" (back)="prevStep()"></app-step11>
+      <app-step12 *ngSwitchCase="12" (next)="nextStep()" (back)="prevStep()"></app-step12>
+      <app-step13 *ngSwitchCase="13" (back)="prevStep()" (submitForm)="onSubmit()"></app-step13>
     </ng-container>
   </div>
 </div>

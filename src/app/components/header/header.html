@@ -1,39 +1,100 @@
-<header class="w-full bg-white border-b border-gray-100">
-  <div class="max-w-7xl mx-auto flex items-center justify-between py-5 px-6">
+<header class="w-full bg-white border-b border-gray-100 fixed top-0 left-0 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 sm:px-6 lg:px-8">
     <!-- Left: Logo -->
     <div class="flex-shrink-0">
       <img src="assets/logo.png" alt="PotionTax Logo" class="h-8 w-auto" />
     </div>
 
-    <!-- Right: Buttons -->
-    <div class="flex items-center space-x-6 gap-2">
-      <nav class="flex-1 flex justify-center gap-2">
-      <ul class="flex items-center space-x-10 text-base text-gray-800 font-normal">
-        <li><a href="#" class="hover:text-[#1687E4] transition">Service</a></li>
-        <li><a href="#" class="hover:text-[#1687E4] transition">About</a></li>
-        <li><a href="#" class="hover:text-[#1687E4] transition">Contact</a></li>
-      </ul>
-    </nav>
+    <!-- Mobile Menu Button (visible below md) -->
+    <button
+      (click)="toggleMenu()"
+      class="md:hidden flex items-center justify-center text-gray-700 hover:text-[#1687E4] focus:outline-none"
+      aria-label="Toggle menu"
+    >
+      <!-- Hamburger Icon -->
+      <svg
+        *ngIf="!isMenuOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-7 w-7"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+
+      <!-- Close Icon -->
+      <svg
+        *ngIf="isMenuOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-7 w-7"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
+      <nav>
+        <ul class="flex items-center space-x-6 lg:space-x-10 text-base text-gray-800 font-normal">
+          <li><a href="#" class="hover:text-[#1687E4] transition">Service</a></li>
+          <li><a href="#" class="hover:text-[#1687E4] transition">About</a></li>
+          <li><a href="#" class="hover:text-[#1687E4] transition">Contact</a></li>
+        </ul>
+      </nav>
+
       <button
-        class="bg-[#1687E4] text-white text-base font-medium px-4 py-3 rounded-md hover:bg-[#0063e6] transition"
+        class="bg-[#1687E4] text-white text-sm sm:text-base font-medium px-3 sm:px-4 py-2 sm:py-3 rounded-md hover:bg-[#0063e6] transition"
       >
         Get Tax Estimate
       </button>
 
       <div
-        class="flex items-center border border-[#1687E4] rounded-md px-4 py-3 text-base text-[#1687E4] cursor-pointer hover:border-[#0073ff] transition"
+        class="flex items-center border border-[#1687E4] rounded-md px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-[#1687E4] cursor-pointer hover:border-[#0073ff] transition"
       >
         English
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4 ml-1 text-gray-500"
-          fill="#1687E4"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 text-gray-500" fill="#1687E4"
+          viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 9l-7 7-7-7" />
         </svg>
       </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (shown when toggled) -->
+  <div
+    *ngIf="isMenuOpen"
+    class="md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-4 animate-slideDown"
+  >
+    <nav>
+      <ul class="flex flex-col space-y-3 text-gray-800 text-base font-normal">
+        <li><a href="#" class="hover:text-[#1687E4] transition">Service</a></li>
+        <li><a href="#" class="hover:text-[#1687E4] transition">About</a></li>
+        <li><a href="#" class="hover:text-[#1687E4] transition">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button
+      class="w-full bg-[#1687E4] text-white text-base font-medium px-4 py-2 rounded-md hover:bg-[#0063e6] transition"
+    >
+      Get Tax Estimate
+    </button>
+
+    <div
+      class="flex justify-center items-center border border-[#1687E4] rounded-md px-4 py-2 text-base text-[#1687E4] cursor-pointer hover:border-[#0073ff] transition"
+    >
+      English
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1 text-gray-500" fill="#1687E4"
+        viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M19 9l-7 7-7-7" />
+      </svg>
     </div>
   </div>
 </header>

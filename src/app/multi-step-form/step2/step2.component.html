@@ -1,8 +1,5 @@
 <div class="mb-8">
-  <a
-    (click)="back.emit()"
-    class="text-[#1687E4] text-sm flex items-center gap-1 mb-3 cursor-pointer"
-  >
+  <a (click)="back.emit()" class="text-[#1687E4] text-sm flex items-center gap-1 mb-3 cursor-pointer">
     <i class="fa fa-arrow-left"></i> Personal tax return (SA100)
   </a>
 </div>
@@ -21,25 +18,23 @@
     </p>
 
     <div class="space-y-3 mb-6">
-      <label
-        *ngFor="let year of years"
+      <label *ngFor="let year of years"
         class="flex items-center justify-between border rounded-lg p-3 cursor-pointer hover:border-[#1687E4]"
-        [class.border-[#1687E4]]="selectedYear === year"
-      >
+        [class.border-[#1687E4]]="selectedYear === year">
         <span>{{ year }}</span>
-        <input
-          type="radio"
-          name="taxYear"
-          [value]="year"
-          [(ngModel)]="selectedYear"
-          class="form-radio text-[#1687E4]"
-        />
+        <input type="radio" name="taxYear" [value]="year" [(ngModel)]="selectedYear"
+          class="form-radio text-[#1687E4]" />
       </label>
     </div>
 
-    <button (click)="continue()" class="bg-[#E30613] text-white px-6 py-2 rounded-full">
-      Start Filing
+    <button (click)="continue()" [disabled]="loading"
+      class="bg-[#E30613] text-white px-6 py-2 rounded-full flex items-center gap-2 disabled:opacity-50">
+      <span *ngIf="!loading">Start Filing</span>
+      <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Submitting...</span>
     </button>
+
+    <p *ngIf="errorMessage" class="text-red-600 mt-2 text-sm">{{ errorMessage }}</p>
+
   </div>
 
   <div class="w-full lg:w-1/2 flex justify-evenly">

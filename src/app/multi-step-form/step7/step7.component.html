@@ -2,40 +2,63 @@
   <a (click)="back.emit()" class="text-[#1687E4] text-sm flex items-center gap-1 mb-6 cursor-pointer">
     <i class="fa fa-arrow-left"></i> Back to KYC
   </a>
-
 </div>
-<div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-sm">
 
-  <h2 class="text-2xl font-semibold mb-1">Provide Business information</h2>
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-sm">
+  <h2 class="text-2xl font-semibold mb-1">Provide Business Information</h2>
   <p class="text-gray-500 text-sm mb-8">
-    Enter your residence address for verification in Latin letters
+    Enter your business information below (if applicable)
   </p>
 
   <form [formGroup]="form" class="space-y-5">
     <div>
-      <label class="block text-sm font-medium mb-1">Are you claiming dependents? *</label>
-      <select formControlName="claimingDependents"
-        class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
+      <label class="block text-sm font-medium mb-1">Do you have a business? *</label>
+      <select
+        formControlName="hasBusiness"
+        class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+      >
         <option>No</option>
         <option>Yes</option>
       </select>
     </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Business Name *</label>
-      <input formControlName="businessName" type="text"
-        class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
+    <div *ngIf="form.get('hasBusiness')?.value === 'Yes'">
+      <div>
+        <label class="block text-sm font-medium mb-1">
+          Business Name <span class="text-red-500">*</span>
+        </label>
+        <input
+          formControlName="businessName"
+          type="text"
+          class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+        />
+        <p *ngIf="form.get('businessName')?.touched && form.get('businessName')?.invalid" class="text-red-500 text-xs mt-1">
+          Business name is required
+        </p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Business EIN (if any)</label>
+        <input
+          formControlName="businessEIN"
+          type="text"
+          class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+        />
+      </div>
     </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Business EIN (if any)</label>
-      <input formControlName="businessEIN" type="text"
-        class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
-    </div>
-
-    <button type="button" (click)="continue()"
-      class="bg-[#E30613] text-white px-10 py-2 rounded-full hover:bg-[#c20511] transition mt-4">
-      Continue
+    <div class="flex justify-center mt-6">
+      <button type="button" (click)="continue()" [disabled]="loading"
+      class="bg-[#E30613] text-white px-6 py-2 rounded-full mt-4 flex items-center justify-center gap-2 disabled:opacity-50">
+      <span *ngIf="!loading">Continue</span>
+      <span *ngIf="loading">
+        <i class="fa fa-spinner fa-spin"></i> Submitting...
+      </span>
     </button>
+    </div>
+
+    <p *ngIf="errorMessage" class="text-red-500 text-sm text-center mt-3">
+      {{ errorMessage }}
+    </p>
   </form>
 </div>

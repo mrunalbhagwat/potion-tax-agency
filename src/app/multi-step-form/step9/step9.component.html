@@ -1,61 +1,127 @@
 <div class="mb-8">
-    <a (click)="back.emit()" class="text-[#1687E4] text-sm flex items-center gap-1 mb-4 cursor-pointer">
-        <i class="fa fa-arrow-left"></i> Back to additional documents
+    <a (click)="back.emit()" class="text-[#1687E4] text-sm flex items-center gap-1 mb-6 cursor-pointer">
+        <i class="fa fa-arrow-left"></i> Back to KYC
     </a>
-
 </div>
-<div class="max-w-2xl mx-auto text-center bg-white p-10 rounded-2xl shadow-sm">
+<div class="max-w-2xl mx-auto bg-white p-10 rounded-2xl shadow-sm">
+    <!-- Back link -->
 
-    <h2 class="text-2xl font-semibold text-center mb-1">Provide Referral information to Get 15% dscount!</h2>
-    <p class="text-gray-500 text-sm text-center mb-8">
+    <!-- Heading -->
+    <h2 class="text-2xl font-semibold mb-2">Provide Additional Information</h2>
+    <p class="text-gray-500 text-sm mb-8">
         Enter your residence address for verification in Latin letters
     </p>
 
-    <form [formGroup]="form" class="space-y-6">
+    <!-- Form -->
+    <form [formGroup]="form" class="space-y-5">
+        <!-- Dropdown fields -->
         <div>
-            <label class="block text-sm text-start font-medium mb-1">
-                Would you refer some friends? <span class="text-red-500">*</span>
-            </label>
-            <select formControlName="claimingDependants"
-                class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
-                <option>No</option>
+            <label class="block text-sm font-medium mb-1">Are You a Military Veteran?</label>
+            <select formControlName="militaryVeteran"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
                 <option>Yes</option>
+                <option>No</option>
             </select>
         </div>
 
-        <div *ngIf="form.get('claimingDependants')?.value === 'Yes'" class="space-y-4">
-            <div *ngFor="let dep of dependants.controls; let i = index" [formGroup]="dep"
-                class="bg-[#F1F8FE] border border-[#CFE7FC] rounded-lg p-4 space-y-3">
-                <div class="flex justify-between items-center">
-                    <p class="font-medium text-lg mb-2">Referral #{{ i + 1 }}</p>
-                    <button type="button" (click)="removeDependant(i)" class="text-red-500 text-sm">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </div>
-
-                <label class="flex justify-start text-base font-medium mb-1">Full name</label>
-                <input placeholder="" formControlName="fullName"
-                    class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
-
-                <label class="flex justify-start text-base font-medium mb-1">Phone Number</label>
-                <input placeholder=""  formControlName="number"
-                    class="w-full border border-gray-600 rounded-md p-2 focus:outline-none focus:border-[#1687E4]" />
-            </div>
-
-            <div class="flex justify-end">
-                
-                <button type="button" (click)="addDependant()"
-                    class="bg-transparent border border-[#1687E4] text-[#1687E4] px-4 py-1 rounded-full text-sm hover:bg-[#1687E4] hover:text-white transition">
-                    Add Referral
-                </button>
-            </div>
+        <div>
+            <label class="block text-sm font-medium mb-1">Did You Make Energy-Efficient Upgrades To Your Home in
+                2024?
+                (e.g., Solar Panels, Windows,
+                Heat Pumps)</label>
+            <select formControlName="energyUpgrade"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
         </div>
 
-        <div class="flex gap-4 mt-6">
-            <button type="button" (click)="continue()"
-                class="bg-[#E30613] text-white px-8 py-2 rounded-full hover:bg-[#c20511] transition">
-                Continue
-            </button>
+        <div>
+            <label class="block text-sm font-medium mb-1">Did You Purchase a Qualifying Electric Or Hybrid Vehicle
+                in
+                2024?</label>
+            <select formControlName="hybridVehicle"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
         </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Did You Pay Significant State Or Local Taxes in 2024?
+                (e.g.,
+                Property Taxes, State Income
+                Taxes)</label>
+            <select formControlName="stateTaxes"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Do You Currently Owe IRS Debt?</label>
+            <select formControlName="irsDebt"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Would You Like A Referral To Help Resolve Past IRS
+                Debt?</label>
+            <select formControlName="referralHelp"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+        </div>
+
+        <!-- Text Fields -->
+        <div>
+            <label class="block text-sm font-medium mb-1">What Is Your Desired Tax Outcome?</label>
+            <input type="text" formControlName="desiredOutcome"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+                placeholder="Enter your answer" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Do You Have an ITIN (This Means You Don't Have a Social
+                Number)? If So, Provide The
+                Number</label>
+            <input type="text" formControlName="itinNumber"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+                placeholder="Enter ITIN" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">If You Have An Identity Protection PIN, Please Provide The
+                Number</label>
+            <input type="text" formControlName="ipPin"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+                placeholder="Enter IP PIN" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">How Much Was Your Tax Refund Last Year? (Estimate if
+                unsure)</label>
+            <input type="text" formControlName="refundAmount"
+                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-[#1687E4]"
+                placeholder="Enter amount" />
+        </div>
+
+        <!-- Continue Button -->
+        <div *ngIf="errorMessage" class="text-red-600 text-sm mt-2">
+            {{ errorMessage }}
+        </div>
+
+        <button type="button" (click)="continue()" [disabled]="loading"
+            class="bg-[#E30613] text-white px-6 py-2 rounded-full mt-4 flex items-center justify-center gap-2 disabled:opacity-50">
+            <span *ngIf="!loading">Continue</span>
+            <span *ngIf="loading">
+                <i class="fa fa-spinner fa-spin"></i> Submitting...
+            </span>
+        </button>
     </form>
 </div>
