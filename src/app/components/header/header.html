@@ -1,17 +1,14 @@
 <header class="w-full bg-white border-b border-gray-100 fixed top-0 left-0 z-50">
   <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 sm:px-6 lg:px-8">
-    <!-- Left: Logo -->
     <div class="flex-shrink-0">
       <img src="assets/logo.png" alt="PotionTax Logo" class="h-8 w-auto" />
     </div>
 
-    <!-- Mobile Menu Button (visible below md) -->
     <button
       (click)="toggleMenu()"
       class="md:hidden flex items-center justify-center text-gray-700 hover:text-[#1687E4] focus:outline-none"
       aria-label="Toggle menu"
     >
-      <!-- Hamburger Icon -->
       <svg
         *ngIf="!isMenuOpen"
         xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +21,6 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
 
-      <!-- Close Icon -->
       <svg
         *ngIf="isMenuOpen"
         xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +34,6 @@
       </svg>
     </button>
 
-    <!-- Desktop Nav -->
     <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
       <nav>
         <ul class="flex items-center space-x-6 lg:space-x-10 text-base text-gray-800 font-normal">
@@ -67,7 +62,6 @@
     </div>
   </div>
 
-  <!-- Mobile Menu (shown when toggled) -->
   <div
     *ngIf="isMenuOpen"
     class="md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-4 animate-slideDown"

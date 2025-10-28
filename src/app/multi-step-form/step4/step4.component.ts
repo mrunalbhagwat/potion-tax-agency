@@ -52,7 +52,7 @@ export class Step4Component {
       next: (res: any) => {
         this.loading = false;
         if (res?.success) {
-          console.log('✅ Step 5 (Filing with spouse) success:', res);
+          
           this.next.emit();
         } else {
           this.errorMessage = res?.message || 'Unexpected response from server';

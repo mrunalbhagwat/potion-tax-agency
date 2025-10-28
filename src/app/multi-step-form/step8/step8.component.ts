@@ -74,23 +74,18 @@ export class Step8Component {
 
     this.loading = true;
 
-    // call service
     this.taxService.uploadBusinessDocumentsStep9(sessionId, uploadedDocs).subscribe({
       next: (res: any) => {
         this.loading = false;
         if (res?.success) {
-          console.log('✅ Step 9 success:', res);
           this.next.emit();
         } else {
-          // if API returns success:false with message
           this.errorMessage = res?.message || 'Unexpected server response';
-          console.warn('Step9 returned success:false', res);
         }
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
         console.error('Step9 upload error:', err);
-        // try to decode validation errors from backend
         if (err.error?.errors) {
           const errors = err.error.errors;
           this.errorMessage = Object.entries(errors)

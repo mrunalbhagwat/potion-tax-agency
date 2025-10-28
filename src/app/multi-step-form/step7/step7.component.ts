@@ -69,7 +69,6 @@ export class Step7Component {
       next: (res: any) => {
         this.loading = false;
         if (res?.success) {
-          console.log('✅ Step 8 (Business Info) success:', res);
           this.next.emit();
         } else {
           this.errorMessage = res?.message || 'Unexpected server response';
@@ -77,7 +76,6 @@ export class Step7Component {
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
-        console.error('❌ Step 8 Error:', err);
         this.errorMessage = err.error?.message || 'Server error occurred';
       },
     });

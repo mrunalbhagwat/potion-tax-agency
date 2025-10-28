@@ -36,7 +36,6 @@ export class Step10Component {
 
   constructor(private taxService: TaxSubmissionService) {}
 
-  /** Handles file selection */
   onFileChange(event: Event, doc: DocumentItem) {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
@@ -51,13 +50,11 @@ export class Step10Component {
     reader.onload = () => (doc.preview = reader.result as string);
     reader.readAsDataURL(file);
 
-    // Fake verify animation
     setTimeout(() => {
       doc.status = 'verified';
     }, 1200);
   }
 
-  /** Remove document */
   remove(doc: DocumentItem) {
     doc.file = undefined;
     doc.preview = undefined;
@@ -65,7 +62,6 @@ export class Step10Component {
     doc.expanded = false;
   }
 
-  /** Submit form with multipart data */
   continue() {
     const sessionId = localStorage.getItem('session_id');
     if (!sessionId) {
@@ -96,7 +92,6 @@ export class Step10Component {
       next: (res: any) => {
         this.loading = false;
         if (res?.success) {
-          console.log('✅ Step 11 success:', res);
           this.next.emit();
         } else {
           this.errorMessage = res?.message || 'Unexpected server response.';
@@ -104,7 +99,6 @@ export class Step10Component {
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
-        console.error('❌ Upload error:', err);
 
         if (err.error?.errors) {
           const errors = err.error.errors;

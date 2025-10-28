@@ -61,7 +61,6 @@ export class Step9Component {
       next: (res: any) => {
         this.loading = false;
         if (res?.success) {
-          console.log('✅ Step 10 success:', res);
           this.next.emit();
         } else {
           this.errorMessage = res?.message || 'Unexpected server response';
@@ -69,7 +68,6 @@ export class Step9Component {
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
-        console.error('Step 10 error:', err);
         if (err.error?.errors) {
           const errors = err.error.errors;
           this.errorMessage = Object.entries(errors)

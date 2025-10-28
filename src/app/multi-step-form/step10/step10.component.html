@@ -3,7 +3,7 @@
     <i class="fa fa-arrow-left"></i> Back to business info
   </a>
 </div>
-<div class="max-w-5xl mx-auto bg-white rounded-2xl shadow p-10">
+<div class="max-w-5xl mx-auto bg-white rounded-2xl shadow">
   <h2 class="text-2xl font-semibold mb-2 text-gray-800">Upload Additional Tax Documents</h2>
   <p class="text-gray-500 text-sm mb-8">
     Start by selecting identity verification below
@@ -12,7 +12,6 @@
   <div class="grid md:grid-rows-3 gap-6">
     <div *ngFor="let doc of docs"
       class="border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col text-center transition-all duration-500 ease-in-out">
-      <!-- Header -->
       <div class="flex justify-between items-center bg-[#F6FBFF] p-4">
         <div class="text-gray-700 font-medium text-left text-sm">
           {{ doc.label }}
@@ -24,7 +23,6 @@
         </label>
       </div>
 
-      <!-- Expanded Preview -->
       <div *ngIf="doc.file" class="flex flex-col w-full">
         <div class="flex-1 bg-gray-50 flex items-center justify-center p-6">
           <ng-container *ngIf="doc.preview; else fileIcon">
@@ -35,12 +33,10 @@
           </ng-template>
         </div>
 
-        <!-- File name -->
         <div class="border-t py-2 text-sm font-medium text-gray-700">
           {{ doc.file.name }}
         </div>
 
-        <!-- Actions -->
         <div class="w-full border-t px-4 py-2 flex justify-between items-center text-xs">
           <div class="flex gap-3">
             <label class="text-[#1687E4] font-medium cursor-pointer">
@@ -65,13 +61,11 @@
           </div>
         </div>
 
-        <!-- Error Message -->
         <div *ngIf="doc.error" class="text-xs text-red-500 pb-3">{{ doc.error }}</div>
       </div>
     </div>
   </div>
 
-  <!-- Continue -->
   <div class="flex justify-end pt-8">
     <div *ngIf="errorMessage" class="text-red-600 text-sm mt-3">{{ errorMessage }}</div>
 

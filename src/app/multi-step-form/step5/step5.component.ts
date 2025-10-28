@@ -24,7 +24,6 @@ export class Step5Component {
       dependants: this.fb.array([]),
     });
 
-    // Reset dependants when "No" is selected
     this.form.get('claimingDependants')?.valueChanges.subscribe((val) => {
       if (val === 'No') {
         this.dependants.clear();
@@ -68,7 +67,6 @@ export class Step5Component {
       next: (res: any) => {
         this.loading = false;
         if (res?.success) {
-          console.log('✅ Step 6 success:', res);
           this.next.emit();
         } else {
           this.errorMessage = res?.message || 'Unexpected server response';

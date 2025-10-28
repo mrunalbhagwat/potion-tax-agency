@@ -4,7 +4,7 @@
   </a>
 
 </div>
-<div class="max-w-5xl mx-auto bg-white rounded-2xl shadow p-10">
+<div class="max-w-5xl mx-auto bg-white rounded-2xl shadow">
   <h2 class="text-2xl font-semibold mb-6 text-gray-800">
     Upload Business Tax Documents
   </h2>
@@ -13,8 +13,7 @@
     <div *ngFor="let doc of docs"
       class="border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col text-center transition-all duration-500 ease-in-out"
       [ngClass]="{ 'h-[320px]': doc.file, '': !doc.file }">
-      <!-- Header (Always Visible) -->
-      <div class="flex flex-row justify-between items-center px-6 py-3" [ngClass]="{ 'border-b bg-gray-50': doc.file }">
+      <div class="flex flex-row justify-between items-center py-3" [ngClass]="{ 'border-b bg-gray-50': doc.file }">
         <div class="text-gray-700 font-medium">{{ doc.label }}</div>
 
         <label
@@ -24,10 +23,8 @@
         </label>
       </div>
 
-      <!-- Expanded Box (only visible after upload) -->
       <div *ngIf="doc.file" class="flex flex-col w-full h-full justify-between transition-all duration-500">
-        <!-- Preview -->
-        <div class="h-44 bg-gray-50 flex items-center justify-center overflow-hidden">
+        <div class="h-36 bg-gray-50 flex items-center justify-center overflow-hidden">
           <ng-container *ngIf="doc.preview; else fileIcon">
             <img [src]="doc.preview" class="max-h-40 max-w-[90%] object-contain rounded-md shadow-sm" />
           </ng-container>
@@ -36,12 +33,10 @@
           </ng-template>
         </div>
 
-        <!-- Filename -->
         <div class="py-2 text-sm font-medium text-gray-700 truncate px-3 border-t">
           {{ doc.file.name }}
         </div>
 
-        <!-- Actions -->
         <div class="w-full border-t px-4 py-2 flex justify-between items-center text-xs">
           <div class="flex gap-3">
             <button class="text-red-500 font-medium" (click)="remove(doc)">

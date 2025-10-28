@@ -11,7 +11,6 @@ interface DocItem {
   status?: 'pending' | 'verified' | 'rejected';
   error?: string;
 }
-
 @Component({
   selector: 'app-step6',
   standalone: true,
@@ -33,7 +32,6 @@ export class Step6Component {
 
   constructor(private taxService: TaxSubmissionService) {}
 
-  // ✅ Handle file upload + preview
   onFileChange(event: any, doc: DocItem) {
     const file = event.target.files[0];
     if (!file) return;
@@ -47,7 +45,6 @@ export class Step6Component {
     reader.onload = () => (doc.preview = reader.result as string);
     reader.readAsDataURL(file);
 
-    // Fake verification status after 1s
     setTimeout(() => {
       const failed = Math.random() < 0.2;
       doc.status = failed ? 'rejected' : 'verified';
@@ -55,7 +52,6 @@ export class Step6Component {
     }, 1000);
   }
 
-  // ✅ Remove file
   remove(doc: DocItem) {
     doc.file = undefined;
     doc.preview = undefined;
@@ -63,7 +59,6 @@ export class Step6Component {
     doc.error = '';
   }
 
-  // ✅ Submit form data to backend
   continue() {
     const sessionId = localStorage.getItem('session_id');
     if (!sessionId) {
@@ -89,13 +84,11 @@ export class Step6Component {
     this.taxService.submitStep7(formData).subscribe({
       next: (res: any) => {
         this.loading = false;
-        console.log('✅ Step 7 Success:', res);
         if (res?.success) this.next.emit();
         else this.errorMessage = res?.message || 'Unexpected server response.';
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
-        console.error('❌ Step 7 Error:', err);
         this.errorMessage =
           err.error?.message || 'Failed to upload. Please try again.';
       },

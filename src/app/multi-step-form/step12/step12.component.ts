@@ -28,10 +28,8 @@ export class Step12Component {
   }
 
   continue() {
-    console.log('Continue clicked ✅');
 
     if (this.form.invalid) {
-      console.warn('Form invalid:', this.form.value);
       this.form.markAllAsTouched();
       return;
     }
@@ -56,7 +54,6 @@ export class Step12Component {
     this.taxService.submitStep12(body).subscribe({
       next: (res: any) => {
         this.loading = false;
-        console.log('✅ API Response:', res);
         if (res?.success) {
           this.next.emit();
         } else {
@@ -65,7 +62,6 @@ export class Step12Component {
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
-        console.error('❌ API Error:', err);
         this.errorMessage =
           err.error?.message ||
           (typeof err.error === 'object' ? JSON.stringify(err.error) : err.error) ||

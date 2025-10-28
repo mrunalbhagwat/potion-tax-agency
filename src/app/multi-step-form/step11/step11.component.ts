@@ -31,13 +31,10 @@ export class Step11Component {
     });
   }
 
-  /** Getter for dependants array */
   get dependants(): FormArray<FormGroup> {
   return this.form.get('dependants') as FormArray<FormGroup>;
 }
 
-
-  /** Add referral row */
   addDependant() {
     const group = this.fb.group({
       fullName: ['', Validators.required],
@@ -46,12 +43,10 @@ export class Step11Component {
     this.dependants.push(group);
   }
 
-  /** Remove referral row */
   removeDependant(index: number) {
     this.dependants.removeAt(index);
   }
 
-  /** Submit form */
   continue() {
     if (!this.form.valid) {
       this.form.markAllAsTouched();
@@ -85,7 +80,6 @@ export class Step11Component {
       next: (res: any) => {
         this.loading = false;
         if (res?.success) {
-          console.log('✅ Referral submitted:', res);
           this.next.emit();
         } else {
           this.errorMessage = res?.message || 'Unexpected server response.';
@@ -93,7 +87,6 @@ export class Step11Component {
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
-        console.error('❌ Referral submission error:', err);
         if (err.error?.errors) {
           const errors = err.error.errors;
           this.errorMessage = Object.entries(errors)

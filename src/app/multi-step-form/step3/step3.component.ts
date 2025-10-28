@@ -53,7 +53,7 @@ export class Step3Component {
       next: (res: any) => {
         this.loading = false;
         if (res?.success) {
-          console.log('✅ Step 3 success:', res);
+        
           this.next.emit();
         } else {
           this.errorMessage = res?.message || 'Unexpected response from server';

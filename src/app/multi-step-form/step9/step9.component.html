@@ -3,18 +3,14 @@
         <i class="fa fa-arrow-left"></i> Back to KYC
     </a>
 </div>
-<div class="max-w-2xl mx-auto bg-white p-10 rounded-2xl shadow-sm">
-    <!-- Back link -->
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-sm">
 
-    <!-- Heading -->
     <h2 class="text-2xl font-semibold mb-2">Provide Additional Information</h2>
     <p class="text-gray-500 text-sm mb-8">
         Enter your residence address for verification in Latin letters
     </p>
 
-    <!-- Form -->
     <form [formGroup]="form" class="space-y-5">
-        <!-- Dropdown fields -->
         <div>
             <label class="block text-sm font-medium mb-1">Are You a Military Veteran?</label>
             <select formControlName="militaryVeteran"
@@ -78,7 +74,6 @@
             </select>
         </div>
 
-        <!-- Text Fields -->
         <div>
             <label class="block text-sm font-medium mb-1">What Is Your Desired Tax Outcome?</label>
             <input type="text" formControlName="desiredOutcome"
@@ -111,7 +106,6 @@
                 placeholder="Enter amount" />
         </div>
 
-        <!-- Continue Button -->
         <div *ngIf="errorMessage" class="text-red-600 text-sm mt-2">
             {{ errorMessage }}
         </div>

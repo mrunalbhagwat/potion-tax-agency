@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TaxSubmissionService } from '../../services/tax-submission.service'; // adjust path
+import { TaxSubmissionService } from '../../services/tax-submission.service'; 
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -34,9 +34,8 @@ export class Step1Component {
       next: (res) => {
         this.loading = false;
         if (res?.success && res?.data?.session_id) {
-          // Store session_id for later steps
           localStorage.setItem('session_id', res.data.session_id);
-          console.log('✅ Step 1 completed, session_id:', res.data.session_id);
+          
           this.next.emit();
         } else {
           this.errorMessage = res?.message || 'Unknown response from server';
